@@ -2,16 +2,12 @@ html, body {
   background: #efefef;      
   height:100%;  
 }
- body {
-	background: url(./img/bg.PNG);
-    background-size: cover;
+body {
+  background: url(./img/bg.png);
+  background-size: cover;
+  margin: 0;
 }
-@font-face {
-  font-family: 'Whitney';
-  font-style: normal;
-  font-weight: bold;
-  src: url(https://onedrive.live.com/download?resid=F87CD694B48033C9!114&authkey=!ADeQuq8LqQCrD3I&ithint=file%2cwoff) format('woff');
-}
+
 #center-text {          
   display: flex;
   flex: 1;
@@ -118,7 +114,7 @@ html, body {
 }
 
 .button-box .icon-text h2 {
-    font-family: "Gotham Black";
+  font-family: Gotham;
     font-size: 20px;
     text-transform: capitalize;
     margin-bottom: 3px;
@@ -126,7 +122,7 @@ html, body {
 
 .button-box .icon-text p {
     color: #D1EAFF;
-    font-family: 'GOTHAM BLACK';
+    font-family: Gotham;
     font-size: 13px;
     font-style: normal;
     font-weight: 400;
@@ -184,7 +180,6 @@ html, body {
     line-height: normal;
     margin-bottom: 10px;
     margin-top: 10px;
-    font-family: 'Whitney SSm A', 'Whitney SSm B', Arial;
 }
 .text-box p {
     text-align: left;
@@ -193,12 +188,12 @@ html, body {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    font-family: "Gotham Black";
+    font-family: Gotham;
     color: #D1EAFF;
 }
 .text-box h2 {
     margin-bottom: 0;
-    font-family: "Gotham Black";
+    font-family: Gotham;
 }			
 #chat-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #ccc;
@@ -290,7 +285,7 @@ html, body {
 /* Shadows/STD */
   box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.16);
   margin-right: 10px;
-  font-family: 'Whitney SSm A', 'Whitney SSm B', Arial;
+  font-family: Whitney;
   font-weight: 400;
   line-height: 1.3;
 }
