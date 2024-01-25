@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Chat UI</title>
+  <link rel='stylesheet'
+    href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
+  <link rel='stylesheet'
+    href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css'>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6804272/781004/css/fonts.css" />
+  <link href="https://db.onlinewebfonts.com/c/0f9c349da923afea31fae4db7b8094f0?family=Gotham+Black" rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    @font-face {
+      font-family: 'Gotham-Book';
+      src: url('fonts/gotham-book.ttf') format('truetype');
+
+    }
+
+    @font-face {
+      font-family: 'Gotham-Black';
+      src: url('fonts/gotham-black.ttf') format('truetype');
+
+    }
+  </style>
+</head>
+
+<body>
+  <!-- partial:index.partial.html -->
+  <div id="center-text">
+  </div>
+  <div id="body">
+
+    <div id="chat-circle" class="btn btn-raised rectangle">
+      <div id="chat-overlay"></div>
+      <div class="button-box">
+        <img class="icon-chat" src="img/chat-icon.png" />
+        <img class="close" src="img/icon-x.png" />
+        <div class="icon-text">
+          <h2>MoA Chatbot</h2>
+          <p>Beta</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-box">
+      <div class="chat-box-header">
+        <div class="icon-box">
+          <img src="img/top-icon.png" />
+        </div>
+        <div class="text-box">
+          <h2>MoA Chatbot</h2>
+          <p>Beta</p>
+        </div>
+
+
+        <span class="chat-box-toggle"><i class="material-icons">close</i></span>
+      </div>
+      <div class="chat-box-body">
+        <div class="chat-box-overlay">
+        </div>
+        <div class="chat-logs">
+
+        </div><!--chat-log -->
+      </div>
+      <div class="chat-input">
+        <p>MoA Chatbot is automated. Responses may be incorrect at times, or may not apply to your situation.</p>
+        <form>
+          <input type="text" id="chat-input" placeholder="Enter your question..." />
+          <button type="submit" class="chat-submit" id="chat-submit"><img src="img/btn-send-message.png" </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- partial -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+  <script src="./script.js"></script>
+</body>
+
+</html>
