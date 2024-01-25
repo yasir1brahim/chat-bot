@@ -3,7 +3,7 @@ html, body {
   height:100%;  
 }
  body {
-	background: url(./img/bg.png);
+	background: url(./img/bg.PNG);
     background-size: cover;
 }
 @font-face {
