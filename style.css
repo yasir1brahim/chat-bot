@@ -6,6 +6,7 @@ body {
   background: url(./img/bg.PNG);
   background-size: cover;
   margin: 0;
+  padding: 100vh 0;
 }
 
 #center-text {          
@@ -22,6 +23,10 @@ body {
 }
 .button-box .close {
   display: none;
+}
+#chat-circle {
+  opacity: 0; 
+  transition: opacity 0.5s ease-in-out;
 }
 #chat-circle {
     position: fixed;
@@ -107,7 +112,17 @@ body {
     border-radius: 80px;
     padding: 12px 19px;
 }
+.chat-logs div:last-child .msg-avatar {
+  display: flex;
+}
 
+.chat-logs div .msg-avatar {
+  display: none;
+}
+
+.chat-logs div:nth-child(odd) .msg-avatar {
+  display: none;
+}
 .button-box {
     display: flex;
     align-items: center;
@@ -262,6 +277,7 @@ body {
   height:20px;
   border-radius:50%;
   float:left;
+  cursor: pointer;
 }
 .chat-msg.self > .msg-avatar img {
   width:20px;
@@ -320,4 +336,10 @@ body {
 .cm-msg-button {
     clear: both;
     margin-bottom: 70px;
+}
+.chat-msg.user > .msg-avatar img.up:hover {
+  background: url('./img/btn-thumb-up-hover.png');
+}
+.chat-msg.user > .msg-avatar img.down:hover {
+  background: url('./img/btn-thumb-down-hover.png');
 }
