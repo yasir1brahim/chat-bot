@@ -3,11 +3,12 @@ html, body {
   height:100%;  
 }
 body {
-  background: url(./img/bg.png);
-  background-size: cover;
-  margin: 0;
+    background: url(./img/bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 70vw 0;
 }
-
 #center-text {          
   display: flex;
   flex: 1;
@@ -104,7 +105,18 @@ body {
   height:320px;
   overflow: hidden;
 }
+.chat-logs .chat-msg .msg-avatar {display:none}
 
+.chat-logs .chat-msg:last-child .msg-avatar {display: flex;}
+.chat-logs .chat-msg:nth-child(odd) .msg-avatar {
+    display: none;
+}	
+.chat-msg.user > .msg-avatar img.up:hover {
+    background: url('./img/btn-thumb-up-hover.png');
+}
+.chat-msg.user > .msg-avatar img.down:hover {
+    background: url('./img/btn-thumb-down-hover.png');
+}
 #chat-circle.rectangle {
     width: auto;
     height: auto;
