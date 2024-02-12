@@ -7,6 +7,7 @@ $(function () {
       return false;
     }
     generate_message(msg, 'self');
+    generateResponse(msg);
     var buttons = [
       {
         name: 'Existing User',
@@ -17,10 +18,52 @@ $(function () {
         value: 'new'
       }
     ];
-    setTimeout(function () {
-      generate_message(msg, 'user');
-    }, 1000)
   })
+
+  async function generateResponse(msg){
+    if (!localStorage.getItem('sessionId')){
+      var sessionId = crypto.randomUUID();
+      localStorage.setItem('sessionId', sessionId);
+    }
+    else{
+      var sessionId = localStorage.getItem('sessionId');
+    }
+
+    try {
+      const url = 'https://apimoa.aimpointdigital.com/public/api/v1/WebGPT/query/run';
+      var rawData = JSON.stringify({
+        "session_id": sessionId,
+        "user_input": msg
+      });
+
+      var headers = new Headers();
+      headers.append('Access-Control-Allow-Origin','*');
+      headers.append('Content-Type', 'application/json');
+
+      var requestOptions = {
+        method: 'POST',
+        headers: headers,
+        mode: 'cors',
+        body: rawData,
+        redirect: 'follow'
+      };
+      
+      await fetch(url, requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        const jsonResponse = JSON.parse(data.response);
+        const messages = jsonResponse.chat_history;
+        const messagesArray = messages.split('<split>');
+
+        const webGPTResponse = messagesArray.filter(message => message.startsWith('WebGPT:'));
+        generate_message(webGPTResponse[0], 'user');
+      })
+      .catch(error => console.log('error', error));
+   
+    } catch (error) {
+        console.error('Error sending POST request:', error);
+    }
+  }
 
   function generate_message(msg, type) {
     INDEX++;
