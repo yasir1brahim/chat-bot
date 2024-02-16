@@ -28,40 +28,39 @@ $(function () {
     else{
       var sessionId = localStorage.getItem('sessionId');
     }
+    
+    const headers = new Headers();
+    headers.append("Origin", "https://yasir1brahim.github.io");
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", "Basic emVIN1NBSWZyWEdJbVR4QkVIczV4MGN5SHFoV1F6Tzk6");
 
-    try {
-      const url = 'https://apimoa.aimpointdigital.com/public/api/v1/WebGPT/query/run';
-      var rawData = JSON.stringify({
-        "session_id": sessionId,
-        "user_input": msg
-      });
+    const raw = JSON.stringify({
+      "session_id": sessionId,
+      "user_input": msg
+    });
 
-      var headers = new Headers();
-      headers.append('Access-Control-Allow-Origin','*');
-      headers.append('Content-Type', 'application/json');
-
-      var requestOptions = {
-        method: 'POST',
-        headers: headers,
-        mode: 'cors',
-        body: rawData,
-        redirect: 'follow'
-      };
+    const requestOptions = {
+      method: "POST",
+      headers: headers,
+      body: raw,
+      redirect: "follow"
+    };
+    try{
+      await fetch("https://apimoa.aimpointdigital.com/public/api/v1/WebGPT/query/run", requestOptions)
+        .then((response) => response.json())
+        .then(data => {
+              const jsonResponse = JSON.parse(data.response);
+              const messages = jsonResponse.chat_history;
+              const messagesArray = messages.split('<split>');
       
-      await fetch(url, requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        const jsonResponse = JSON.parse(data.response);
-        const messages = jsonResponse.chat_history;
-        const messagesArray = messages.split('<split>');
-
-        const webGPTResponse = messagesArray.filter(message => message.startsWith('WebGPT:'));
-        generate_message(webGPTResponse[0], 'user');
-      })
-      .catch(error => console.log('error', error));
-   
-    } catch (error) {
-        console.error('Error sending POST request:', error);
+              const webGPTResponse = messagesArray.filter(message => message.startsWith('WebGPT:'));
+              generate_message(webGPTResponse[0], 'user');
+            })
+        .catch((error) => console.error(error)
+        );
+    }
+    catch(error){
+      console.log("Error: ", error);
     }
   }
 
