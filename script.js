@@ -28,39 +28,35 @@ $(function () {
     else{
       var sessionId = localStorage.getItem('sessionId');
     }
-    
-    const headers = new Headers();
-    headers.append("Origin", "https://yasir1brahim.github.io");
-    headers.append("Content-Type", "application/json");
-    headers.append("Authorization", "Basic emVIN1NBSWZyWEdJbVR4QkVIczV4MGN5SHFoV1F6Tzk6");
 
-    const raw = JSON.stringify({
+    var headers = new Headers();
+    headers.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
       "session_id": sessionId,
       "user_input": msg
     });
 
-    const requestOptions = {
-      method: "POST",
+    var requestOptions = {
+      method: 'POST',
       headers: headers,
       body: raw,
-      redirect: "follow"
+      redirect: 'follow'
     };
     try{
-      await fetch("https://apimoa.aimpointdigital.com/public/api/v1/WebGPT/query/run", requestOptions)
-        .then((response) => response.json())
+      await fetch("http://161.35.38.90:5000/proxy", requestOptions)
+        .then(response => response.json())
         .then(data => {
-              const jsonResponse = JSON.parse(data.response);
-              const messages = jsonResponse.chat_history;
-              const messagesArray = messages.split('<split>');
-      
-              const webGPTResponse = messagesArray.filter(message => message.startsWith('WebGPT:'));
-              generate_message(webGPTResponse[0], 'user');
-            })
-        .catch((error) => console.error(error)
-        );
+          const jsonResponse = JSON.parse(data.response);
+          const messages = jsonResponse.chat_history;
+          const messagesArray = messages.split('<split>');
+          const webGPTResponse = messagesArray.filter(message => message.startsWith('WebGPT:'));
+          generate_message(webGPTResponse[0], 'user');
+        })
+        .catch(error => console.log('error', error));
     }
     catch(error){
-      console.log("Error: ", error);
+      console.log("Error: ",error);
     }
   }
 
