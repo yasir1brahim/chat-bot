@@ -7,6 +7,7 @@ $(function () {
       return false;
     }
     generate_message(msg, 'self');
+    botTyping();
     generateResponse(msg);
     var buttons = [
       {
@@ -47,6 +48,7 @@ $(function () {
       await fetch("http://161.35.38.90:5000/proxy", requestOptions)
         .then(response => response.json())
         .then(data => {
+          $("#bot-typing").remove();
           const jsonResponse = JSON.parse(data.response);
           const messages = jsonResponse.chat_history;
           const messagesArray = messages.split('<split>');
@@ -59,6 +61,16 @@ $(function () {
       console.log("Error: ",error);
     }
   }
+
+  function botTyping() {
+    var html;
+    html=`<div id="bot-typing">
+          <span></span>
+          <span></span>
+          <span></span>
+          </div>`
+          $(".chat-logs").append(html);
+        }
 
   function generate_message(msg, type) {
     INDEX++;
