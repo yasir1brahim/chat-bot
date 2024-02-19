@@ -123,9 +123,11 @@ body {
 }	
 .chat-msg.user > .msg-avatar img.up:hover {
     background: url('./img/btn-thumb-up-hover.png');
+    cursor: pointer;
 }
 .chat-msg.user > .msg-avatar img.down:hover {
     background: url('./img/btn-thumb-down-hover.png');
+    cursor: pointer;
 }
 #chat-circle.rectangle {
     width: auto;

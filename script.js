@@ -52,8 +52,9 @@ $(function () {
           const jsonResponse = JSON.parse(data.response);
           const messages = jsonResponse.chat_history;
           const messagesArray = messages.split('<split>');
-          const webGPTResponse = messagesArray.filter(message => message.startsWith('WebGPT:'));
-          generate_message(webGPTResponse[0], 'user');
+          var response = messagesArray.filter(message => message.startsWith('WebGPT:'));
+          webGPTResponse = response[0].replace('WebGPT:','');
+          generate_message(webGPTResponse, 'user');
         })
         .catch(error => console.log('error', error));
     }
@@ -77,8 +78,8 @@ $(function () {
     var str = "";
     str += "<div id='cm-msg-" + INDEX + "' class=\"chat-msg " + type + "\">";
     str += "          <span class=\"msg-avatar\">";
-    str += "            <img class=\"up\" src=\"img/btn-thumb-up.png\" alt=\"Avatar\">";
-    str += "            <img class=\"down\" src=\"img/btn-thumb-down.png\" alt=\"Avatar\">";
+    str += "            <img class=\"up\" onclick='sendFeedback(`Helpful`)' src=\"img/btn-thumb-up.png\" alt=\"Avatar\">";
+    str += "            <img class=\"down\" onclick='sendFeedback(`Not Helpful`)' src=\"img/btn-thumb-down.png\" alt=\"Avatar\">";
     str += "          <\/span>";
     str += "          <div class=\"cm-msg-text\">";
     str += msg;
@@ -90,32 +91,6 @@ $(function () {
       $("#chat-input").val('');
     }
     $(".chat-logs").stop().animate({ scrollTop: $(".chat-logs")[0].scrollHeight }, 1000);
-  }
-
-  function generate_button_message(msg, buttons) {
-    INDEX++;
-    var btn_obj = buttons.map(function (button) {
-      return "              <li class=\"button\"><a href=\"javascript:;\" class=\"btn btn-primary chat-btn\" chat-value=\"" + button.value + "\">" + button.name + "<\/a><\/li>";
-    }).join('');
-    var str = "";
-    str += "<div id='cm-msg-" + INDEX + "' class=\"chat-msg user\">";
-    str += "          <span class=\"msg-avatar\">";
-    str += "            <img class=\"up\" src=\"img/btn-thumb-up.png\" alt=\"Avatar\">";
-    str += "            <img class=\"down\" src=\"img/btn-thumb-down.png\" alt=\"Avatar\">";
-    str += "          </span>";
-    str += "          <div class=\"cm-msg-text\">";
-    str += msg;
-    str += "          <\/div>";
-    str += "          <div class=\"cm-msg-button\">";
-    str += "            <ul>";
-    str += btn_obj;
-    str += "            <\/ul>";
-    str += "          <\/div>";
-    str += "        <\/div>";
-    $(".chat-logs").append(str);
-    $("#cm-msg-" + INDEX).hide().fadeIn(300);
-    $(".chat-logs").stop().animate({ scrollTop: $(".chat-logs")[0].scrollHeight }, 1000);
-    $("#chat-input").attr("disabled", true);
   }
 
   $(document).delegate(".chat-btn", "click", function () {
@@ -164,3 +139,38 @@ $(function () {
     }
   }
 });
+
+async function sendFeedback(rating){
+  if (rating === 'Helpful'){
+    $(".msg-avatar img.up").css("background-image", "url(./img/btn-thumb-up-hover.png)")
+    $(".msg-avatar img.down").css("background-image", "url(./img/btn-thumb-down.png)")
+  }
+  else {
+    $(".msg-avatar img.down").css("background-image", "url(./img/btn-thumb-down-hover.png)")
+    $(".msg-avatar img.up").css("background-image", "url(./img/btn-thumb-up.png)")
+  }
+  var headers = new Headers();
+  headers.append("Content-Type", "application/json");
+  sessionId = localStorage.getItem('sessionId');
+
+  var raw = JSON.stringify({
+    "session_id": sessionId,
+    "rating": rating
+  });
+
+  var requestOptions = {
+    method: 'POST',
+    headers: headers,
+    body: raw,
+    redirect: 'follow'
+  };
+  try{
+    await fetch("http://161.35.38.90:5000/feedback", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log("Feedback given"))
+      .catch(error => console.log('error', error));
+  }
+  catch(error){
+    console.log("Error: ",error);
+  }
+}
