@@ -23,7 +23,8 @@ $(function () {
 
   async function generateResponse(msg){
     if (!localStorage.getItem('sessionId')){
-      var sessionId = crypto.randomUUID();
+      const d = new Date();
+      let sessionId = d.getTime().toString();
       localStorage.setItem('sessionId', sessionId);
     }
     else{
