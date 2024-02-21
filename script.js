@@ -79,10 +79,12 @@ $(function () {
     INDEX++;
     var str = "";
     str += "<div id='cm-msg-" + INDEX + "' class=\"chat-msg " + type + "\">";
-    str += "          <span class=\"msg-avatar\">";
-    str += "            <img class=\"up\" onclick='sendFeedback(`Helpful`)' src=\"img/btn-thumb-up.png\" alt=\"Avatar\">";
-    str += "            <img class=\"down\" onclick='sendFeedback(`Not Helpful`)' src=\"img/btn-thumb-down.png\" alt=\"Avatar\">";
-    str += "          <\/span>";
+    if (type === 'user') {
+      str += "          <span class=\"msg-avatar\">";
+      str += "            <img class=\"up\" onclick='sendFeedback(`Helpful`)' src=\"img/btn-thumb-up.png\" alt=\"Avatar\">";
+      str += "            <img class=\"down\" onclick='sendFeedback(`Not Helpful`)' src=\"img/btn-thumb-down.png\" alt=\"Avatar\">";
+      str += "          <\/span>";
+    }
     str += "          <div class=\"cm-msg-text\">";
     str += msg;
     str += "          <\/div>";
