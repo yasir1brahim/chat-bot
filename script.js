@@ -150,6 +150,11 @@ $(function () {
     });
   }, 2000);
 
+  setTimeout(()=>{
+    var chatCircle = $('#chat-circle');
+    chatCircle.removeClass('rectangle');
+  },4000)
+
   function checkScroll() {
     var chatCircle = $('#chat-circle');
 
@@ -165,7 +170,8 @@ $(function () {
         center: true,
         items: 1,
         loop: true,
-  nav: true,
+        nav: true,
+        dots: false,
         margin: 0,
         responsiveClass: true,
     });
