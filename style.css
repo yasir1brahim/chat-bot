@@ -400,3 +400,120 @@ body {
     transform: translateY(0px);
  }
 }
+
+
+/* Slider */
+.slider-container {
+  font-family: Whitney, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+  font-weight: 350;
+  border: 1px solid #ADADAD;
+  border-radius: 8px;
+  margin: 0;
+  box-shadow: 0 4px 6px 0 #00000029;
+  max-width: 80%;
+}
+.slider-main-container {
+    display: flex;
+}
+.slider-main-container .thumb {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.slider-container p {
+  text-align: left !important;
+}
+
+.header-slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ADADAD;
+    width: 100%;
+}
+
+.header-slider div:first-child {
+  padding: 0 2% 0 5%;
+}
+
+.header-slider p {
+  font-size: 16px;
+  color: #000000;
+  line-height: 19.2px;
+}
+
+.read-more {
+  color: #005093 !important;
+  line-height: 16.8px;
+}
+
+
+.slider-content p:first-child {
+  text-align: left;
+}
+.slider-content > p{
+  padding-left:10px;
+}
+.slider-content p {
+  font-size: 14px;
+  color: #000000;
+  text-align: left;
+}
+
+.card {
+  border: 1px solid #C4C4C4;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin: 0 0.5rem;
+
+}
+
+/* .left {
+  position: absolute;
+  bottom: 110%;
+  left: 88%;
+  color: rgb(10, 81, 138);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.right {
+  position: absolute;
+  bottom: 110%;
+  right: 3%;
+  color: rgb(10, 81, 138);
+  z-index: 1;
+  cursor: pointer;
+} */
+
+/* .slick-initialized .slick-slide:first-child {
+  margin: 0 5px;
+} */
+.owl-carousel .owl-stage {
+	display:flex;
+}
+.owl-next {
+  position: absolute;
+  bottom: 105px;
+  right: 5px;
+}
+
+.owl-prev {
+  position: absolute;
+  bottom: 105px;
+  right: 15px;
+}
+
+.owl-carousel .owl-nav {
+    position: absolute;
+    right: 0;
+    margin-top: 20px;
+}
+
+.owl-carousel .owl-nav button.owl-next,
+.owl-carousel .owl-nav button.owl-prev {
+      font-size: 35px;
+    color: rgb(10, 81, 138);
+    font-family: system-ui;
+	    line-height: 0.75;
+}

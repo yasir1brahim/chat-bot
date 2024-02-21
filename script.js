@@ -86,12 +86,40 @@ $(function () {
     str += msg;
     str += "          <\/div>";
     str += "        <\/div>";
+    if (type === 'user') {
+      str+= `<div class="slider-content">
+      <p>Sources:</p>
+      <div class="owl-carousel">
+      <div class="card">
+      <div class="slider-body">
+      <p>Lorem ipsum dolor sit amet, consectetur.</p>
+          <p class="read-more">Read More</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="slider-body">
+          <p>Lorem ipsum dolor sit amet, consectetur.</p>
+          <p class="read-more">Read More</p>
+        </div>
+      </div>
+      <div class="card">
+      <div class="slider-body">
+      <p>Lorem ipsum dolor sit amet, consectetur.</p>
+      <p class="read-more">Read More</p>
+      </div>
+      </div>
+      
+      </div>
+      </div>`
+    }
     $(".chat-logs").append(str);
     $("#cm-msg-" + INDEX).hide().fadeIn(300);
     if (type == 'self') {
       $("#chat-input").val('');
     }
     $(".chat-logs").stop().animate({ scrollTop: $(".chat-logs")[0].scrollHeight }, 1000);
+    // Initialize slider on document ready
+    initializeSlider();
   }
 
   $(document).delegate(".chat-btn", "click", function () {
@@ -139,6 +167,17 @@ $(function () {
       chatCircle.removeClass('rectangle');
     }
   }
+
+  function initializeSlider() {
+    $('.owl-carousel').owlCarousel({
+        center: true,
+        items: 1,
+        loop: true,
+  nav: true,
+        margin: 0,
+        responsiveClass: true,
+    });
+}
 });
 
 async function sendFeedback(rating){
