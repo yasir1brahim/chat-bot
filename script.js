@@ -94,15 +94,15 @@ $(function () {
                 <p>Sources:</p>
                 <div class="owl-carousel">`;
 
-      refs.forEach(ref => {
-          str += `<div class="card">
-                      <div class="slider-body">
-                          <p>${ref}</p>
-                          <p class="read-more"><a href="${ref}">Read More</a></p>
-                      </div>
-                  </div>`;
-      });
-
+    refs.forEach(ref => {
+      let truncatedRef = ref.length > 50 ? ref.substring(0, 50) + "..." : ref;
+      str += `<div class="card">
+                  <div class="slider-body">
+                      <p>${truncatedRef}</p>
+                      <p class="read-more"><a href="${ref}">Read More</a></p>
+                  </div>
+              </div>`;
+  });
       str += `</div>
               </div>`;
     }
