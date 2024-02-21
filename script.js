@@ -6,7 +6,7 @@ $(function () {
     if (msg.trim() == '') {
       return false;
     }
-    generate_message(msg, 'self');
+    generate_message(msg, 'self', []);
     botTyping();
     generateResponse(msg);
     var buttons = [
@@ -55,7 +55,8 @@ $(function () {
           const messagesArray = messages.split('<split>');
           var response = messagesArray.filter(message => message.startsWith('WebGPT:'));
           webGPTResponse = response[0].replace('WebGPT:','');
-          generate_message(webGPTResponse, 'user');
+          refs = jsonResponse.refs;
+          generate_message(webGPTResponse, 'user', refs);
         })
         .catch(error => console.log('error', error));
     }
@@ -74,7 +75,7 @@ $(function () {
           $(".chat-logs").append(html);
         }
 
-  function generate_message(msg, type) {
+  function generate_message(msg, type, refs) {
     INDEX++;
     var str = "";
     str += "<div id='cm-msg-" + INDEX + "' class=\"chat-msg " + type + "\">";
@@ -86,31 +87,22 @@ $(function () {
     str += msg;
     str += "          <\/div>";
     str += "        <\/div>";
-    if (type === 'user') {
-      str+= `<div class="slider-content">
-      <p>Sources:</p>
-      <div class="owl-carousel">
-      <div class="card">
-      <div class="slider-body">
-      <p>Lorem ipsum dolor sit amet, consectetur.</p>
-          <p class="read-more">Read More</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="slider-body">
-          <p>Lorem ipsum dolor sit amet, consectetur.</p>
-          <p class="read-more">Read More</p>
-        </div>
-      </div>
-      <div class="card">
-      <div class="slider-body">
-      <p>Lorem ipsum dolor sit amet, consectetur.</p>
-      <p class="read-more">Read More</p>
-      </div>
-      </div>
-      
-      </div>
-      </div>`
+    if (type === 'user' && refs.length != 0) {
+      str += `<div class="slider-content">
+                <p>Sources:</p>
+                <div class="owl-carousel">`;
+
+      refs.forEach(ref => {
+          str += `<div class="card">
+                      <div class="slider-body">
+                          <p>${ref}</p>
+                          <p class="read-more"><a href="${ref}">Read More</a></p>
+                      </div>
+                  </div>`;
+      });
+
+      str += `</div>
+              </div>`;
     }
     $(".chat-logs").append(str);
     $("#cm-msg-" + INDEX).hide().fadeIn(300);
@@ -126,7 +118,7 @@ $(function () {
     var value = $(this).attr("chat-value");
     var name = $(this).html();
     $("#chat-input").attr("disabled", false);
-    generate_message(name, 'self');
+    generate_message(name, 'self', []);
   })
 
   $(".chat-box").hide(); // Hide chat-box by default
