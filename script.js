@@ -54,7 +54,8 @@ $(function () {
           const messages = jsonResponse.chat_history;
           const messagesArray = messages.split('<split>');
           var response = messagesArray.filter(message => message.startsWith('WebGPT:'));
-          webGPTResponse = response[0].replace('WebGPT:','');
+          var lastMessage = response.pop();
+          webGPTResponse = lastMessage.replace('WebGPT:','');
           refs = jsonResponse.refs;
           generate_message(webGPTResponse, 'user', refs);
         })
