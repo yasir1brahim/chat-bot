@@ -3,6 +3,14 @@ $(function () {
   $("#chat-submit").click(function (e) {
     e.preventDefault();
     var msg = $("#chat-input").val();
+
+    msg = msg.replace(/\&/g, '&amp;')
+    .replace(/\</g, '&lt;')
+    .replace(/\>/g, '&gt;')
+    .replace(/\"/g, '&quot;')
+    .replace(/\'/g, '&#x27;')
+    .replace(/\//g, '&#x2F;');
+
     if (msg.trim() == '') {
       return false;
     }
