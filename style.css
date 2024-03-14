@@ -289,12 +289,6 @@ body {
 }
 
 
-@media only screen and (max-width: 500px) {
-   .chat-logs {
-        height:40vh;
-    }
-}
-
 .chat-msg.user > .msg-avatar img {
   width:20px;
   height:20px;
@@ -533,4 +527,90 @@ body {
 
 .owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav button.owl-prev{
   font-weight: 200;
+}
+
+@media only screen and (max-width: 1024px) {
+  #chat-circle {
+      bottom: 10px;
+      right: 10px;
+      width: 45px;
+      height: 45px;
+  }
+
+  .button-box img {
+      width: 25px;
+  }
+
+  .chat-box {
+      bottom: 60px;
+      right: 15px;
+      max-width: 320px;
+  }
+
+  .text-box h3 {
+      font-size: 16px;
+  }
+
+  .text-box p {
+      font-size: 12px;
+  }
+  .button-box .icon-text h2 {
+    font-size: 15px;
+}
+#bot-typing span {
+  width: 5px;
+  height: 5px;
+}
+
+  .icon-box {
+      max-width: 35px;
+  }
+
+  .icon-box img {
+      width: 100%;
+  }
+
+  .chat-box-toggle img {
+      width: 100%;
+  }
+
+  .chat-box-toggle {
+      max-width: 25px;
+  }
+
+
+  .chat-logs {
+      height: 200px;
+  }
+
+  .chat-box-body {
+      height: 200px;
+  }
+
+  .chat-input p {
+      font-size: 12px;
+  }
+
+  .cm-msg-text {
+      font-size: 12px;
+      padding: 10px 15px;
+  }
+
+  #chat-input {
+      height: 45px;
+      font-size: 14px;
+  }
+
+  .chat-submit {
+      right: 0;
+      padding-top: 7px;
+  }
+
+  .chat-submit img {
+      width: 100%;
+  }
+
+  .chat-box-header {
+      padding: 10px;
+  }
 }
